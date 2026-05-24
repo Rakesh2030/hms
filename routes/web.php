@@ -121,5 +121,14 @@ Route::get('/fix', function () {
     return 'fixed';
 });
 
+Route::get('/seed', function () {
+
+    Artisan::call('db:seed', [
+        '--force' => true
+    ]);
+
+    return 'Database seeded successfully';
+});
+
 
 require __DIR__ . '/auth.php';
