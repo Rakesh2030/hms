@@ -24,13 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
+
         // Share settings with all Blade files so logo, title and footer are dynamic.
         View::composer('*', function ($view) {
-            $appSettings = null;
 
-            if (env('APP_ENV') === 'production') {
-                URL::forceScheme('https');
-            }
+            $appSettings = null;
 
             if (Schema::hasTable('settings')) {
                 $appSettings = Setting::first();
