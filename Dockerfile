@@ -29,7 +29,6 @@ RUN mkdir -p storage/framework/views
 
 RUN chmod -R 777 storage bootstrap/cache
 
-RUN php artisan optimize:clear
 
 EXPOSE 10000
 
