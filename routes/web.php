@@ -15,6 +15,7 @@ use App\Models\Bed;
 use App\Models\Billing;
 use App\Models\Doctor;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -111,6 +112,13 @@ Route::get('/refresh-captcha', function () {
     return response()->json([
         'captcha' => captcha_img()
     ]);
+});
+
+Route::get('/fix', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('storage:link');
+
+    return 'fixed';
 });
 
 
