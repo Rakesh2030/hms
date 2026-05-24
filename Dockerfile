@@ -4,10 +4,14 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     curl \
+    zip \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    zip
+    libfreetype6-dev \
+    libjpeg62-turbo-dev
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
@@ -19,7 +23,13 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan config:clear
+RUN mkdir -p storage/framework/cache
+RUN mkdir -p storage/framework/sessions
+RUN mkdir -p storage/framework/views
+
+RUN chmod -R 777 storage bootstrap/cache
+
+RUN php artisan optimize:clear
 
 EXPOSE 10000
 
