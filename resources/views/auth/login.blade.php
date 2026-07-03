@@ -9,6 +9,17 @@
         <link rel="icon" href="{{ asset($appSettings->favicon) }}">
     @endif
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .captcha {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .captcha img {
+            height: 40px;
+            width:auto;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -48,7 +59,7 @@
 
                                 <label class="form-label">Captcha</label>
 
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="d-flex align-items-center gap-2 captcha">
 
                                     <span>{!! captcha_img() !!}</span>
 
